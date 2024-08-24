@@ -1,5 +1,5 @@
 import { Router } from "express";
-import User from "../models/user.js";
+import User from "../models/userModel.js";
 const router = Router();
 
 // CREATE
@@ -20,9 +20,11 @@ router.post("/users/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
-    res.send(user);
-  } catch (error) {}
-  res.status(400).send(error);
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 // READ

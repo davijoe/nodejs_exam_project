@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Task from "../models/task.js";
+import Task from "../models/taskModel.js";
 const router = Router();
 
 // CREATE
