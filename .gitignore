@@ -16,3 +16,6 @@ npm-debug.log*
 
 # Dependency lock files
 package-lock.json
+
+# Other
+.private
