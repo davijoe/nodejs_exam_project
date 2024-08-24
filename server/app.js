@@ -8,18 +8,6 @@ import Task from "./models/task.js";
 const app = express();
 app.use(express.json());
 
-// mongoose.connect(process.env.MONGODB_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }).then(() => {
-//     console.log("Database connected");
-// }).catch((error) => {
-//     console.log("Error connecting to database: ", error);
-// });
-
-// const kanbanRouter = require("./routers/kanbanRouter");
-// app.use("/api/kanban", kanbanRouter);
-
 app.get('/users', (req, res) => {
     User.find({}).then((users) => {
         res.send(users);
@@ -81,8 +69,6 @@ app.post('/tasks', (req, res) => {
         res.status(400).send(error);
     });
 });
-
-
 
 
 const PORT = process.env.PORT || 3000;
