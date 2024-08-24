@@ -10,7 +10,8 @@
     "start": "node ./app.js",
     "poststart": "echo 'Server started!'",
     "dev": "nodemon app.js",
-    "lint": "eslint --fix ./**/*.js",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
     "format": "prettier -w ."
   },
   "keywords": [],
