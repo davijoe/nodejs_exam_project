@@ -11,6 +11,6 @@ export default [
       globals: globals.node,
     },
   },
-  pluginJs.configs.recommended,
+  ...pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
 ];
