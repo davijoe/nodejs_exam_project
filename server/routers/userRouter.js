@@ -1,5 +1,6 @@
 import { Router } from "express";
 import User from "../models/userModel.js";
+import auth from "../middleware/authMiddleware.js";
 const router = Router();
 
 // POST
@@ -28,14 +29,18 @@ router.post("/users/login", async (req, res) => {
   }
 });
 
-// READ
-router.get("/users", async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.send(users);
-  } catch (error) {
-    res.status(500).send(error);
-  }
+// GET
+// router.get("/users", auth, async (req, res) => {
+//   try {
+//     const users = await User.find({});
+//     res.send(users);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// });
+
+router.get("/users/me", auth, async (req, res) => {
+  res.send(req.user);
 });
 
 router.get("/users/:id", async (req, res) => {
