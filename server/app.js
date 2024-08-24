@@ -1,11 +1,10 @@
 import express from "express";
 import './database/mongoose.js';
-import dotenv from "dotenv";
+
 import User from "./models/user.js";
 import Task from "./models/task.js";
 
 
-dotenv.config();
 const app = express();
 app.use(express.json());
 
