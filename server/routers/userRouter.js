@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../models/userModel.js";
 import auth from "../middleware/authMiddleware.js";
+import multer from "multer";
 const router = Router();
 
 /**
@@ -19,6 +20,7 @@ const router = Router();
  * -- DELETE  | /users/:me        | Delete an entire resource
  */
 
+// POST
 router.post("/users", async (req, res) => {
   const user = new User(req.body);
 
@@ -29,6 +31,12 @@ router.post("/users", async (req, res) => {
   } catch (e) {
     res.status(400).send(e);
   }
+});
+
+const upload = multer({});
+
+router.post("/users/me/avatar", upload.single("avatar"), (req, res) => {
+  res.send();
 });
 
 router.post("/users/login", async (req, res) => {

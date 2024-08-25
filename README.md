@@ -22,4 +22,4 @@ It is a simple Kanban app with a real time chat as well.
     - creation date
 - limit (custom)
 - pagination (skip)
-
+- Upload files

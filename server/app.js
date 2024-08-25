@@ -12,12 +12,10 @@ app.use(taskRouter);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server is running on port", PORT));
 
-import Task from "./models/taskModel.js";
-import User from "./models/userModel.js";
-
-const main = async () => {
-  //   const user = await User.findById("66cae944230ca3940387de4b");
-  //   await user.populate("tasks").execPopulate;
-};
-
-main();
+import multer from "multer";
+const upload = multer({
+  dest: "images",
+});
+app.post("/upload", upload.single("upload"), (req, res) => {
+  res.set();
+});
