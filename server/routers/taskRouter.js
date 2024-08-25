@@ -1,6 +1,7 @@
 import { Router } from "express";
 import Task from "../models/taskModel.js";
 import auth from "../middleware/authMiddleware.js";
+import User from "../models/userModel.js";
 const router = Router();
 
 // CREATE
