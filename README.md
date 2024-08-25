@@ -12,11 +12,14 @@ It is a simple Kanban app with a real time chat as well.
 
 ## Features
 - Sign up
-- Login
+- Login / logout
+- Account deletion. Includes owned tasks
 - Manage tasks (CRUD)
+
+- sorting & filtering
 - Query Tasks on:
     - completed
     - creation date
 - limit (custom)
 - pagination (skip)
--
+

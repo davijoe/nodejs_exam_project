@@ -24,10 +24,17 @@ router.post("/tasks", auth, async (req, res) => {
 // /tasks?limit=10&skip=20
 router.get("/tasks", auth, async (req, res) => {
   const match = {};
+  const sort = {};
+
   const limit = parseInt(req.query.limit) || 10; // default to 10 if not provided
 
   if (req.query.completed) {
     match.completed = req.query.completed === "true";
+  }
+
+  if (req.query.sortBy) {
+    const parts = req.query.sortBy.split(":");
+    sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
   }
 
   try {
@@ -36,10 +43,10 @@ router.get("/tasks", auth, async (req, res) => {
       path: "tasks",
       match,
       options: {
-        limit: limit, // Apply the parsed limit
-        skip: parseInt(req.query.skip) || 0, // Optional: handle pagination with skip
+        limit: limit,
+        skip: parseInt(req.query.skip) || 0,
         sort: {
-          createdAt: req.query.sortBy === "desc" ? -1 : 1, // Optional: sort by creation date
+          createdAt: req.query.sortBy === "desc" ? -1 : 1,
         },
       },
     });
