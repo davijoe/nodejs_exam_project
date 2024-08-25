@@ -39,8 +39,8 @@ router.post("/users/login", async (req, res) => {
     );
     const token = await user.generateAuthToken();
     res.send({ user, token });
-  } catch (e) {
-    res.status(400).send(e);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
@@ -52,7 +52,7 @@ router.post("/users/logout", auth, async (req, res) => {
     await req.user.save();
 
     res.send();
-  } catch (e) {
+  } catch (error) {
     res.status(500).send();
   }
 });
@@ -62,7 +62,7 @@ router.post("/users/logoutAll", auth, async (req, res) => {
     req.user.tokens = [];
     await req.user.save();
     res.send();
-  } catch (e) {
+  } catch (error) {
     res.status(500).send();
   }
 });

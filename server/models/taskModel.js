@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import pkg from "validator";
 
 const Task = mongoose.model("Task", {
   name: {
     type: String,
     default: "Untitled",
+    trim: true,
   },
   description: {
     type: String,
@@ -13,7 +15,6 @@ const Task = mongoose.model("Task", {
   completed: {
     type: Boolean,
     default: false,
-    required: true,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

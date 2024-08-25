@@ -1,7 +1,6 @@
 import { Router } from "express";
 import Task from "../models/taskModel.js";
 import auth from "../middleware/authMiddleware.js";
-import User from "../models/userModel.js";
 const router = Router();
 
 // CREATE
@@ -26,7 +25,7 @@ router.get("/tasks", auth, async (req, res) => {
     const tasks = await Task.find({ owner: req.user._id });
     res.send(tasks);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send();
   }
 });
 
@@ -42,7 +41,7 @@ router.get("/tasks/:id", auth, async (req, res) => {
 
     res.send(task);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send();
   }
 });
 
@@ -93,7 +92,7 @@ router.delete("/tasks/:id", auth, async (req, res) => {
 
     res.send(task);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send();
   }
 });
 
