@@ -35,7 +35,7 @@ router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
       req.body.email,
-      req.body.password
+      req.body.password,
     );
     const token = await user.generateAuthToken();
     res.send({ user, token });
@@ -77,7 +77,7 @@ router.patch("/users/me", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password", "age"];
   const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
+    allowedUpdates.includes(update),
   );
 
   if (!isValidOperation) {
@@ -102,8 +102,11 @@ router.delete("/users/me", auth, async (req, res) => {
     // if (!user) {
     //   return res.status(404).send();
     // }
-
-    await req.user.remove();
+    console.log("trying to delete user");
+    console.log(req.user);
+    await req.user.deleteOne();
+    console.log("user deleted");
+    console.log(req.user);
     res.send(req.user);
   } catch (error) {
     res.status(500).send(error);

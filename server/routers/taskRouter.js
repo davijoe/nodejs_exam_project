@@ -24,7 +24,7 @@ router.post("/tasks", auth, async (req, res) => {
 // /tasks?limit=10&skip=20
 router.get("/tasks", auth, async (req, res) => {
   const match = {};
-  const limit = parseInt(req.query.limit) || 0; // default to 0 if not provided
+  const limit = parseInt(req.query.limit) || 10; // default to 10 if not provided
 
   if (req.query.completed) {
     match.completed = req.query.completed === "true";

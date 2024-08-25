@@ -8,3 +8,15 @@ It is a simple Kanban app with a real time chat as well.
 - Node.js
 - MongoDB
 - Socket.io
+
+
+## Features
+- Sign up
+- Login
+- Manage tasks (CRUD)
+- Query Tasks on:
+    - completed
+    - creation date
+- limit (custom)
+- pagination (skip)
+-
