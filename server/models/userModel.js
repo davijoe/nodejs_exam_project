@@ -51,6 +51,11 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+userSchema.methods.getPublicProfile = function () {
+  const user = this;
+  console.log(this._id);
+};
+
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   const token = jwt.sign(
