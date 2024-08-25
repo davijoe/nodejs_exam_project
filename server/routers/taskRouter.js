@@ -19,13 +19,34 @@ router.post("/tasks", auth, async (req, res) => {
   }
 });
 
-// READ
+// GET
+// /tasks?completed=true
+// /tasks?limit=10&skip=20
 router.get("/tasks", auth, async (req, res) => {
+  const match = {};
+  const limit = parseInt(req.query.limit) || 0; // default to 0 if not provided
+
+  if (req.query.completed) {
+    match.completed = req.query.completed === "true";
+  }
+
   try {
-    const tasks = await Task.find({ owner: req.user._id });
-    res.send(tasks);
+    // Populate tasks related to the user with optional matching and limit
+    await req.user.populate({
+      path: "tasks",
+      match,
+      options: {
+        limit: limit, // Apply the parsed limit
+        skip: parseInt(req.query.skip) || 0, // Optional: handle pagination with skip
+        sort: {
+          createdAt: req.query.sortBy === "desc" ? -1 : 1, // Optional: sort by creation date
+        },
+      },
+    });
+
+    res.send(req.user.tasks);
   } catch (error) {
-    res.status(500).send();
+    res.status(500).send(error);
   }
 });
 
@@ -50,7 +71,7 @@ router.patch("/tasks/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "description", "completed"];
   const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
+    allowedUpdates.includes(update),
   );
 
   if (!isValidOperation) {
