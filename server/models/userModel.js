@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    trim: true,
     minlength: 7,
+    trim: true,
     validate(value) {
       if (value.toLowerCase().includes("password")) {
-        throw new Error("Dont write password, duh!");
+        throw new Error('Password cannot contain "password"');
       }
     },
   },
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     default: 0,
     validate(value) {
       if (value < 0) {
-        throw new Error("Age must be a positive number");
+        throw new Error("Age must be a postive number");
       }
     },
   },
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, "sadasdsadasdasdas");
+  const token = jwt.sign({ _id: user._id.toString() }, "thisismynewcourse");
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -77,7 +77,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
   return user;
 };
 
-// Hashes the plain text password
+// Hash the plain text password before saving
 userSchema.pre("save", async function (next) {
   const user = this;
 

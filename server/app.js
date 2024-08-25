@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
+import jwt from "jsonwebtoken";
 import "./database/mongoose.js";
-import userRouter from "./routers/userRouter.js";
 import taskRouter from "./routers/taskRouter.js";
-
+import userRouter from "./routers/userRouter.js";
 const app = express();
 app.use(express.json());
 app.use(userRouter);
