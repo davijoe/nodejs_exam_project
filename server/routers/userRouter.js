@@ -3,6 +3,8 @@ import User from "../models/userModel.js";
 import auth from "../middleware/authMiddleware.js";
 import multer from "multer";
 import sharp from "sharp";
+import { Resend } from "resend";
+import { sendWelcomeEmail } from "../emails/emails.js";
 const router = Router();
 
 /**
@@ -24,9 +26,12 @@ const router = Router();
 // POST
 router.post("/users", async (req, res) => {
   const user = new User(req.body);
-
   try {
     await user.save();
+
+    const activationLink = `${process.env.HOST}/activate?token=${token}`;
+    await sendWelcomeEmail(user.email, user.name, activationLink);
+
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (error) {
@@ -42,7 +47,7 @@ router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
       req.body.email,
-      req.body.password,
+      req.body.password
     );
     const token = await user.generateAuthToken();
     res.send({ user, token });
@@ -84,7 +89,7 @@ router.patch("/users/me", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password", "age"];
   const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update),
+    allowedUpdates.includes(update)
   );
 
   if (!isValidOperation) {
@@ -143,7 +148,7 @@ router.post(
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
-  },
+  }
 );
 
 router.delete("/users/me/avatar", auth, async (req, res) => {
