@@ -1,26 +1,28 @@
 import mongoose from "mongoose";
 import pkg from "validator";
 
-const Task = mongoose.model("Task", {
-  name: {
-    type: String,
-    default: "Untitled",
-    trim: true,
+const taskSchema = new mongoose.Schema(
+  {
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
   },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
+  {
+    timestamps: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User",
-  },
-});
+);
+
+const Task = mongoose.model("Task", taskSchema);
 
 export default Task;

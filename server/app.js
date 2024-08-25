@@ -12,13 +12,12 @@ app.use(taskRouter);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server is running on port", PORT));
 
-import auth from "./middleware/authMiddleware.js";
 import Task from "./models/taskModel.js";
 import User from "./models/userModel.js";
 
 const main = async () => {
-  const user = await User.findById("66cae944230ca3940387de4b");
-  await user.populate("tasks").execPopulate;
+  //   const user = await User.findById("66cae944230ca3940387de4b");
+  //   await user.populate("tasks").execPopulate;
 };
 
 main();
