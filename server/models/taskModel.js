@@ -15,6 +15,10 @@ const Task = mongoose.model("Task", {
     default: false,
     required: true,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 export default Task;
