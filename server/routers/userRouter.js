@@ -14,9 +14,9 @@ const router = Router();
  * -- POST -- | /users/logout     | A user
  * -- POST -- | /users/logoutAll  | A user log out and reset all tokens
  *                                |
- * -- PATCH - | /users/:id        | To change a single resource partly (or fully)
+ * -- PATCH - | /users/:me        | Change a single resource partly (or fully)
  *                                |
- * -- DELETE  | /users/:me        | Delete a user resource
+ * -- DELETE  | /users/:me        | Delete an entire resource
  */
 
 router.post("/users", async (req, res) => {
@@ -73,7 +73,7 @@ router.get("/users/me", auth, async (req, res) => {
 });
 
 // PATCH
-router.patch("/users/:id", async (req, res) => {
+router.patch("/users/me", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password", "age"];
   const isValidOperation = updates.every((update) =>
@@ -85,18 +85,12 @@ router.patch("/users/:id", async (req, res) => {
   }
 
   try {
-    const user = await User.findById(req.params.id);
+    updates.forEach((update) => (req.user[update] = req.body[update]));
+    await req.user.save();
 
-    updates.forEach((update) => (user[update] = req.body[update]));
-    await user.save();
-
-    if (!user) {
-      return res.status(404).send();
-    }
-
-    res.send(user);
-  } catch (e) {
-    res.status(400).send(e);
+    res.send(req.user);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
