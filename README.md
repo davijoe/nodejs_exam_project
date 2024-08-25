@@ -23,3 +23,4 @@ It is a simple Kanban app with a real time chat as well.
 - limit (custom)
 - pagination (skip)
 - Upload files
+    - 
