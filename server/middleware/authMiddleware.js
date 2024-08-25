@@ -1,3 +1,4 @@
+import "dotenv/config";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
@@ -5,7 +6,7 @@ const auth = async (req, res, next) => {
   try {
     console.log(req.header("Autorization"));
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "thisisasecretnoonewilleverknow");
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const user = await User.findOne({
       _id: decoded._id,
       "tokens.token": token,

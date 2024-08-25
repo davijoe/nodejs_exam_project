@@ -1,3 +1,4 @@
+import "dotenv/config";
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/duck_db", {});
+mongoose.connect(process.env.DB_URL + "/" + process.env.DB_NAME, {});
