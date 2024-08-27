@@ -4,9 +4,9 @@ document
     console.log("Submit event triggered"); // Already working
     event.preventDefault(); // Prevent the default form submission behavior
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const name = document.getElementById("signup-name").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
+    const password = document.getElementById("signup-password").value.trim();
 
     console.log("Name:", name);
     console.log("Email:", email);
