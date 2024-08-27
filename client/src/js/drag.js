@@ -44,3 +44,4 @@ const insertAboveTask = (zone, mouseY) => {
 
   return closestTask;
 };
+
