@@ -1,10 +1,10 @@
 import { Router } from "express";
 import User from "../models/userModel.js";
 import auth from "../middleware/authMiddleware.js";
-import multer from "multer";
 import sharp from "sharp";
 import { Resend } from "resend";
 import { sendWelcomeEmail } from "../emails/emails.js";
+import upload from "../middleware/fileSystemMiddleware.js";
 const router = Router();
 
 /**
@@ -24,13 +24,13 @@ const router = Router();
  */
 
 // POST
-router.post("/users", async (req, res) => {
+router.post("/users/signup", async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
 
-    const activationLink = `${process.env.HOST}/activate?token=${token}`;
-    await sendWelcomeEmail(user.email, user.name, activationLink);
+    //  const activationLink = `${process.env.HOST}/activate?token=${token}`;
+    //  await sendWelcomeEmail(user.email, user.name, activationLink);
 
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
@@ -118,19 +118,6 @@ router.delete("/users/me", auth, async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-});
-
-const upload = multer({
-  limits: {
-    fileSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error("Please upload an image"));
-    }
-
-    cb(undefined, true);
-  },
 });
 
 router.post(

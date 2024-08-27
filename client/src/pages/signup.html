@@ -3,18 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page</title>
-    <!-- Add any necessary CSS here -->
+    <title>Sign Up - Gummiand</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>Welcome to My Landing Page</h1>
-    <form id="signup-form">
-      <input type="text" id="name" placeholder="Name" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
+  <body class="bg-gray-100 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl font-bold">GummiAnd 🦆</h1>
+        <nav>
+          <a href="#" class="text-gray-600 hover:text-gray-900 mx-2">Home</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 mx-2">About</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 mx-2">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Signup Form Section -->
+    <section class="flex items-center justify-center min-h-screen">
+      <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center text-gray-900">Sign Up</h2>
+        <form id="signup-form" class="mt-6">
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="mb-6">
+            <label for="password" class="block text-gray-700">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Sign Up
+          </button>
+        </form>
+        <p class="mt-4 text-center text-gray-600">
+          Already have an account?
+          <a href="login.html" class="text-blue-500 hover:underline"
+            >Login here</a
+          >
+        </p>
+      </div>
+    </section>
     <script src="../js/signup.js"></script>
-    <script src="../js/login.js"></script>
   </body>
 </html>
