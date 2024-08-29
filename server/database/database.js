@@ -1,5 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb"
-import "dotenv/config";
+import { mongoose } from 'mongoose'
+
 
 const client = new MongoClient(process.env.DB_URI, {
   serverApi: {
@@ -10,6 +11,14 @@ const client = new MongoClient(process.env.DB_URI, {
 });
 console.log(`Connecting to MongoDB at URI: ${process.env.DB_URI ? 'URI found' : 'No URI provided'}`);
 
+mongoose.connect(process.env.DB_URI, {
+  serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of 10 seconds
+  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+}).then(() => {
+  console.log('Connected to MongoDB');
+}).catch(err => {
+  console.error('Error connecting to MongoDB', err);
+});
 
 async function run() {
   try {

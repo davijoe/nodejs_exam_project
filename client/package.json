@@ -1,8 +1,19 @@
 {
+  "name": "gummiand",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "http-server"
+  },
   "devDependencies": {
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.10",
     "vite": "^5.4.2"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
   }
 }
