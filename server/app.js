@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import "./database/mongoose.js";
+import "./database/database.js";
 import taskRouter from "./routers/taskRouter.js";
 import userRouter from "./routers/userRouter.js";
 const app = express();

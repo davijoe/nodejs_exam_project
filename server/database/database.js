@@ -1,15 +1,15 @@
+import { MongoClient, ServerApiVersion } from "mongodb"
 import "dotenv/config";
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-import { DB_URI } from 'dotenv'
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(DB_URI, {
+const client = new MongoClient(process.env.DB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   }
 });
+console.log(`Connecting to MongoDB at URI: ${process.env.DB_URI ? 'URI found' : 'No URI provided'}`);
+
 
 async function run() {
   try {
