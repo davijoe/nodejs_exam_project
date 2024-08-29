@@ -2,8 +2,8 @@ import { Router } from "express";
 import User from "../models/userModel.js";
 import auth from "../middleware/authMiddleware.js";
 import sharp from "sharp";
-import { Resend } from "resend";
-import { sendWelcomeEmail } from "../emails/emails.js";
+//import { Resend } from "resend";
+//import { sendWelcomeEmail } from "../emails/emails.js";
 import upload from "../middleware/fileSystemMiddleware.js";
 const router = Router();
 
